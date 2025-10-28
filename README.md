@@ -7,12 +7,6 @@ The dataset contains various vocal measurements such as jitter, shimmer, and pit
 
 ## Dataset
 
-Sure ✅ — here’s the **dataset section** cleanly written for your README:
-
----
-
-## 📊 Dataset
-
 * **Source:** [Kaggle – Parkinson’s Disease Detection Dataset](https://www.kaggle.com/datasets/debasisdotcom/parkinson-disease-detection)
 * **File used:** `parkinson.csv`
 * **Description:**
