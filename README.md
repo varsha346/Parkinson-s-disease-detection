@@ -7,7 +7,13 @@ The dataset contains various vocal measurements such as jitter, shimmer, and pit
 
 ## Dataset
 
-* **Source:** [UCI Machine Learning Repository – Parkinson’s Disease Dataset](https://archive.ics.uci.edu/ml/datasets/parkinsons)
+Sure ✅ — here’s the **dataset section** cleanly written for your README:
+
+---
+
+## 📊 Dataset
+
+* **Source:** [Kaggle – Parkinson’s Disease Detection Dataset](https://www.kaggle.com/datasets/debasisdotcom/parkinson-disease-detection)
 * **File used:** `parkinson.csv`
 * **Description:**
   The dataset consists of 24 columns (22 feature columns + 1 target column + 1 name identifier).
