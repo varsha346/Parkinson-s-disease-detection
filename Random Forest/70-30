@@ -18,6 +18,7 @@ parkinsons_data = pd.read_csv('Parkinsson disease.csv')
 X = parkinsons_data.drop(columns=['name','status'], axis=1)
 Y = parkinsons_data['status']
 
+
 # ----------------------------
 # Train-test split
 # ----------------------------
