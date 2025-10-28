@@ -53,8 +53,17 @@ train_acc = accuracy_score(Y_train, train_pred)
 test_pred = model.predict(X_test)
 test_acc = accuracy_score(Y_test, test_pred)
 
-print(f"Accuracy on training data: {train_acc*100:.2f}%")
-print(f"Accuracy on test data: {test_acc*100:.2f}%")
+algo_name = "Random Forest Classifier"
+train_ratio = 0.8
+test_ratio = 0.2
+
+print("\n----------------------------------------------")
+print(f"🧠 Algorithm Used: {algo_name}")
+print(f"📊 Data Split: {int(train_ratio*100)}% Training | {int(test_ratio*100)}% Testing")
+print("----------------------------------------------")
+print(f"✅ Accuracy on Training Data: {train_acc*100:.2f}%")
+print(f"✅ Accuracy on Testing Data: {test_acc*100:.2f}%")
+print("----------------------------------------------")
 
 # ----------------------------
 # Building a Predictive System
