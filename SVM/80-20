@@ -1,112 +1,99 @@
+# -*- coding: utf-8 -*-
+"""Parkinson's Disease Detection using SVM"""
 
-import streamlit as st
+# ----------------------------
+# Import Libraries
+# ----------------------------
 import numpy as np
 import pandas as pd
-import pickle
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report
 
 # ----------------------------
-# Load model and scaler
+# Step 1: Load Dataset
 # ----------------------------
-model = pickle.load(open('parkinson_model.pkl', 'rb'))
-scaler = pickle.load(open('scaler.pkl', 'rb'))
+parkinsons_data = pd.read_csv('parkinson.csv')
 
-# Load dataset for feature names
-data = pd.read_csv('parkinson.csv')
-features = list(data.drop(columns=['name', 'status']).columns)
-
-# ----------------------------
-# Streamlit UI
-# ----------------------------
-st.set_page_config(page_title="🧬 Parkinson's Disease Detection", layout="centered")
-
-st.title("🧠 Parkinson's Disease Detection")
-st.write("This app uses an SVM classifier to detect Parkinson’s disease from biomedical voice measurements.")
-
-st.sidebar.header("🧾 Input Patient Data")
+# Display first few rows
+print("Dataset Preview:")
+print(parkinsons_data.head())
 
 # ----------------------------
-# Sample Test Data
+# Step 2: Data Cleaning
 # ----------------------------
-sample_data = {
-    'MDVP:Fo(Hz)': 230.12345,
-    'MDVP:Fhi(Hz)': 240.56789,
-    'MDVP:Flo(Hz)': 220.98765,
-    'MDVP:Jitter(%)': 0.00987,
-    'MDVP:Jitter(Abs)': 0.00012,
-    'MDVP:RAP': 0.00456,
-    'MDVP:PPQ': 0.00512,
-    'Jitter:DDP': 0.01234,
-    'MDVP:Shimmer': 0.04567,
-    'MDVP:Shimmer(dB)': 0.21000,
-    'Shimmer:APQ3': 0.02012,
-    'Shimmer:APQ5': 0.02567,
-    'MDVP:APQ': 0.03045,
-    'Shimmer:DDA': 0.05023,
-    'NHR': 0.01234,
-    'HNR': 18.76543,
-    'RPDE': 0.567890,
-    'DFA': 0.876543,
-    'spread1': -5.432100,
-    'spread2': 0.256789,
-    'D2': 2.345678,
-    'PPE': 0.123456
-}
+# Drop non-numeric column 'name'
+parkinsons_data = parkinsons_data.drop(columns=['name'], axis=1)
 
+# ----------------------------
+# Step 3: Split Data into Features & Target
+# ----------------------------
+X = parkinsons_data.drop(columns=['status'], axis=1)
+y = parkinsons_data['status']
 
-# sample_data_healthy = {
-#     'MDVP:Fo(Hz)': 190.23456,
-#     'MDVP:Fhi(Hz)': 200.34567,
-#     'MDVP:Flo(Hz)': 185.12345,
-#     'MDVP:Jitter(%)': 0.00123,
-#     'MDVP:Jitter(Abs)': 0.00001,
-#     'MDVP:RAP': 0.00145,
-#     'MDVP:PPQ': 0.00150,
-#     'Jitter:DDP': 0.00321,
-#     'MDVP:Shimmer': 0.00890,
-#     'MDVP:Shimmer(dB)': 0.08500,
-#     'Shimmer:APQ3': 0.00450,
-#     'Shimmer:APQ5': 0.00560,
-#     'MDVP:APQ': 0.00670,
-#     'Shimmer:DDA': 0.01450,
-#     'NHR': 0.00310,
-#     'HNR': 28.12345,
-#     'RPDE': 0.412345,
-#     'DFA': 0.723456,
-#     'spread1': -7.876543,
-#     'spread2': 0.167890,
-#     'D2': 1.654321,
-#     'PPE': 0.080123
-# }
+# ----------------------------
+# Step 4: Split into Training & Test Sets
+# ----------------------------
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=2
+)
+
+print(X.shape[1]) 
+
+# ----------------------------
+# Step 5: Feature Scaling
+# ----------------------------
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# ----------------------------
+# Step 6: Train SVM Model
+# ----------------------------
+svm_model = SVC(kernel='linear')   # you can also try 'rbf' or 'poly'
+svm_model.fit(X_train, y_train)
+
+# ----------------------------
+# Step 7: Model Evaluation
+# ----------------------------
+# Predict on training data
+train_pred = svm_model.predict(X_train)
+train_acc = accuracy_score(y_train, train_pred)
+print("\nTraining Accuracy:", train_acc)
+
+# Predict on test data
+test_pred = svm_model.predict(X_test)
+test_acc = accuracy_score(y_test, test_pred)
+print("Test Accuracy:", test_acc)
+
+print("\nClassification Report:\n")
+print(classification_report(y_test, test_pred))
 
 
 # ----------------------------
-# User Input Section
+# Step 8: Predict for a Single Instance (Corrected)
 # ----------------------------
-inputs = []
-use_sample = st.sidebar.checkbox("🧪 Use Sample Data", value=True)
 
-for feature in features:
-    mean_val = float(data[feature].mean())
-    default_val = float(sample_data.get(feature, mean_val)) if use_sample else mean_val
-    # ✅ Remove min/max to prevent Streamlit errors
-    value = st.sidebar.number_input(f"{feature}", value=default_val, step=0.000001, format="%.6f")
-    inputs.append(value)
+# Your input data should have exactly 22 feature values (no 'name', no 'status')
+# Example from dataset (first row without name and status)
+input_data = (119.992, 157.302, 74.997, 0.00784, 0.00007,
+              0.00370, 0.00554, 0.01109, 0.04374, 0.42600,
+              0.02182, 0.03130, 0.02971, 0.01790, 0.18600,
+              0.00779, 0.00370, 21.03300, 0.414783, 0.815285,
+              -4.813031, 0.266482)   # ✅ total 22 features
 
-# Convert to DataFrame for scaler
-input_df = pd.DataFrame([inputs], columns=features)
-scaled_input = scaler.transform(input_df)
+# Convert to numpy array & reshape
+input_data = np.asarray(input_data).reshape(1, -1)
 
-# ----------------------------
-# Prediction Button
-# ----------------------------
-if st.button("Predict"):
-    prediction = model.predict(scaled_input)
-    if prediction[0] == 0:
-        st.success("✅ The person **does not have Parkinson’s Disease**.")
-    else:
-        st.error("⚠️ The person **has Parkinson’s Disease**.")
+# Scale input data
+input_data = scaler.transform(input_data)
 
-# ----------------------------
-# Footer
-# ----------------------------
-st.caption("Developed with ❤️ using Streamlit and Scikit-learn")
+# Predict
+prediction = svm_model.predict(input_data)
+
+if prediction[0] == 1:
+    print("\nResult: The person has Parkinson’s Disease.")
+else:
+    print("\nResult: The person does NOT have Parkinson’s Disease.")
+
