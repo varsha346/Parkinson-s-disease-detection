@@ -1,14 +1,14 @@
 
 ----------------------------------------------
-🧠 Algorithm Used: XGBoost Classifier
-📊 Data Split: 80% Training | 20% Testing
+ Algorithm Used: XGBoost Classifier
+ Data Split: 80% Training | 20% Testing
 ----------------------------------------------
-✅ Accuracy on Training Data: 100.00%
-✅ Accuracy on Testing Data: 94.87%
+ Accuracy on Training Data: 100.00%
+ Accuracy on Testing Data: 94.87%
 ----------------------------------------------
 
-🔍 Prediction Output: [0]
-✅ The Person does NOT have Parkinson’s Disease
+ Prediction Output: [0]
+ The Person does NOT have Parkinson’s Disease
 /usr/local/lib/python3.12/dist-packages/xgboost/training.py:199: UserWarning: [04:19:45] WARNING: /workspace/src/learner.cc:790: 
 Parameters: { "use_label_encoder" } are not used.
 
