@@ -1,1 +1,18 @@
+Training Accuracy: 0.8846153846153846
+Test Accuracy: 0.8717948717948718
 
+Classification Report:
+
+              precision    recall  f1-score   support
+
+           0       0.71      0.62      0.67         8
+           1       0.91      0.94      0.92        31
+
+    accuracy                           0.87        39
+   macro avg       0.81      0.78      0.79        39
+weighted avg       0.87      0.87      0.87        39
+
+
+Result: The person has Parkinson’s Disease.
+/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
+  warnings.warn(
