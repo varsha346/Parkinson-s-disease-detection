@@ -1,1 +1,89 @@
+# -*- coding: utf-8 -*-
+"""Parkinson's Disease Detection using 1D CNN"""
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv1D, MaxPooling1D, Flatten, Dense, Dropout
+from tensorflow.keras.utils import to_categorical
+from sklearn.metrics import accuracy_score
+
+# ----------------------------
+# Data Collection & Analysis
+# ----------------------------
+parkinsons_data = pd.read_csv('Parkinsson disease.csv')
+
+# Separate features & target
+X = parkinsons_data.drop(columns=['name','status'], axis=1)
+Y = parkinsons_data['status']
+
+# Train-test split
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+
+# Data Standardization
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Reshape input for CNN: (samples, features, 1)
+X_train = np.expand_dims(X_train, axis=2)
+X_test = np.expand_dims(X_test, axis=2)
+
+# Convert labels to categorical
+Y_train = to_categorical(Y_train)
+Y_test = to_categorical(Y_test)
+
+# ----------------------------
+# CNN Model Building
+# ----------------------------
+model = Sequential([
+    Conv1D(64, kernel_size=3, activation='relu', input_shape=(X_train.shape[1], 1)),
+    MaxPooling1D(pool_size=2),
+    Conv1D(128, kernel_size=3, activation='relu'),
+    MaxPooling1D(pool_size=2),
+    Flatten(),
+    Dense(64, activation='relu'),
+    Dropout(0.3),
+    Dense(2, activation='softmax')
+])
+
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# ----------------------------
+# Model Training
+# ----------------------------
+history = model.fit(X_train, Y_train, epochs=50, batch_size=16, validation_split=0.2, verbose=1)
+
+# ----------------------------
+# Model Evaluation
+# ----------------------------
+test_loss, test_acc = model.evaluate(X_test, Y_test, verbose=0)
+print("\n----------------------------------------------")
+print("🧠 Algorithm Used: Convolutional Neural Network (1D CNN)")
+print("📊 Data Split: 80% Training | 20% Testing")
+print("----------------------------------------------")
+print(f"✅ Accuracy on Testing Data: {test_acc*100:.2f}%")
+print("----------------------------------------------")
+
+# ----------------------------
+# Predictive System
+# ----------------------------
+input_data = (197.07600,206.89600,192.05500,0.00289,0.00001,0.00166,0.00168,0.00498,0.01098,
+              0.09700,0.00563,0.00680,0.00802,0.01689,0.00339,26.77500,0.422229,0.741367,
+              -7.348300,0.177551,1.743867,0.085569)
+
+input_data = np.asarray(input_data).reshape(1, -1)
+std_data = scaler.transform(input_data)
+std_data = np.expand_dims(std_data, axis=2)
+
+prediction = model.predict(std_data)
+pred_class = np.argmax(prediction, axis=1)[0]
+
+print(prediction)
+if pred_class == 0:
+    print("✅ The Person does NOT have Parkinson’s Disease")
+else:
+    print("⚠️ The Person HAS Parkinson’s Disease")
 
