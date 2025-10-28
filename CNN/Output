@@ -1,0 +1,28 @@
+ Algorithm Used: Convolutional Neural Network (1D CNN)
+ Data Split: 80% Training | 20% Testing
+----------------------------------------------
+ Accuracy on Testing Data: 89.74%
+
+==============================================
+ Training: 50% | Testing: 50%
+==============================================
+/usr/local/lib/python3.12/dist-packages/keras/src/layers/convolutional/base_conv.py:113: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+ Accuracy on Testing Data: 89.80%
+----------------------------------------------
+
+==============================================
+ Training: 60% | Testing: 40%
+==============================================
+/usr/local/lib/python3.12/dist-packages/keras/src/layers/convolutional/base_conv.py:113: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+ Accuracy on Testing Data: 91.03%
+----------------------------------------------
+
+==============================================
+ Training: 70% | Testing: 30%
+==============================================
+/usr/local/lib/python3.12/dist-packages/keras/src/layers/convolutional/base_conv.py:113: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(activity_regularizer=activity_regularizer, **kwargs)
+ Accuracy on Testing Data: 86.44%
+----------------------------------------------
