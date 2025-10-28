@@ -1,14 +1,14 @@
 
 FOR 50-50
 ----------------------------------------------
-🧠 Algorithm Used: Random Forest Classifier
-📊 Data Split: 50% Training | 50% Testing
+ Algorithm Used: Random Forest Classifier
+ Data Split: 50% Training | 50% Testing
 ----------------------------------------------
-✅ Accuracy on Training Data: 100.00%
-✅ Accuracy on Testing Data: 93.88%
+ Accuracy on Training Data: 100.00%
+ Accuracy on Testing Data: 93.88%
 ----------------------------------------------
 [0]
-✅ The Person does NOT have Parkinson’s Disease
+The Person does NOT have Parkinson’s Disease
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -18,14 +18,14 @@ FOR 50-50
 
 FOR 60-40
 ----------------------------------------------
-🧠 Algorithm Used: Random Forest Classifier
-📊 Data Split: 60% Training | 40% Testing
+ Algorithm Used: Random Forest Classifier
+ Data Split: 60% Training | 40% Testing
 ----------------------------------------------
-✅ Accuracy on Training Data: 100.00%
-✅ Accuracy on Testing Data: 94.87%
+ Accuracy on Training Data: 100.00%
+ Accuracy on Testing Data: 94.87%
 ----------------------------------------------
 [0]
-✅ The Person does NOT have Parkinson’s Disease
+ The Person does NOT have Parkinson’s Disease
 /usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
   warnings.warn(
 
@@ -42,14 +42,14 @@ FOR 60-40
 FOR 70-30
 
 ----------------------------------------------
-🧠 Algorithm Used: Random Forest Classifier
-📊 Data Split: 70% Training | 30% Testing
+ Algorithm Used: Random Forest Classifier
+ Data Split: 70% Training | 30% Testing
 ----------------------------------------------
-✅ Accuracy on Training Data: 100.00%
-✅ Accuracy on Testing Data: 94.87%
+ Accuracy on Training Data: 100.00%
+ Accuracy on Testing Data: 94.87%
 ----------------------------------------------
 [0]
-✅ The Person does NOT have Parkinson’s Disease
+ The Person does NOT have Parkinson’s Disease
 /usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
   warnings.warn(
 
@@ -64,14 +64,14 @@ FOR 70-30
 
 FOR 80-20
 ----------------------------------------------
-🧠 Algorithm Used: Random Forest Classifier
-📊 Data Split: 80% Training | 20% Testing
+ Algorithm Used: Random Forest Classifier
+ Data Split: 80% Training | 20% Testing
 ----------------------------------------------
-✅ Accuracy on Training Data: 100.00%
-✅ Accuracy on Testing Data: 94.87%
+ Accuracy on Training Data: 100.00%
+ Accuracy on Testing Data: 94.87%
 ----------------------------------------------
 [0]
-✅ The Person does NOT have Parkinson’s Disease
+ The Person does NOT have Parkinson’s Disease
 /usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but StandardScaler was fitted with feature names
   warnings.warn(
 
