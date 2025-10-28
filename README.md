@@ -1,11 +1,11 @@
-Parkinson’s Disease Detection using Machine Learning
+# Parkinson’s Disease Detection using Machine Learning
 
 This project aims to detect **Parkinson’s Disease** using multiple **Machine Learning** and **Deep Learning** models trained on **voice-based biomedical features**.
 The dataset contains various vocal measurements such as jitter, shimmer, and pitch-related parameters that help in differentiating healthy individuals from those with Parkinson’s disease.
 
 ---
 
-Dataset
+## Dataset
 
 * **Source:** [UCI Machine Learning Repository – Parkinson’s Disease Dataset](https://archive.ics.uci.edu/ml/datasets/parkinsons)
 * **File used:** `parkinson.csv`
@@ -20,9 +20,9 @@ Dataset
 
 ---
 
-## ⚙️ Technologies & Libraries Used
+## Technologies & Libraries Used
 
-### 🧩 Core Libraries
+### Core Libraries
 
 * `numpy`
 * `pandas`
@@ -30,7 +30,7 @@ Dataset
 * `tensorflow / keras`
 * `xgboost`
 
-### 🧠 Machine Learning Models
+### Machine Learning Models
 
 * **KNN (K-Nearest Neighbors)**
 * **SVM (Support Vector Machine)**
@@ -40,7 +40,7 @@ Dataset
 
 ---
 
-## 🚀 Project Workflow
+## Project Workflow
 
 1. **Import Libraries**
    Load essential packages for data handling, preprocessing, and model training.
@@ -92,41 +92,12 @@ Dataset
 8. **Single Instance Prediction**
    Allows prediction for one patient record using the trained model after scaling.
 
----
-
-## 📊 Example Output
-
-```
-Training Accuracy: 0.9679
-Test Accuracy: 0.7692
-
-Classification Report:
-              precision    recall  f1-score   support
-           0       0.46      0.75      0.57         8
-           1       0.92      0.77      0.84        31
-    accuracy                           0.77        39
-   macro avg       0.69      0.76      0.71        39
-weighted avg       0.83      0.77      0.79        39
-
-Result: The person has Parkinson’s Disease.
-```
 
 ---
 
-## 💡 Future Improvements
+## Future Improvements
 
-* Hyperparameter tuning using GridSearchCV.
-* Implementing LSTM or hybrid CNN-LSTM models for time-series voice features.
-* Creating a simple web interface using Flask or Streamlit for user interaction.
-
----
-
-## 🧾 License
-
-This project is for **educational and research purposes** only.
-Dataset credits: UCI Machine Learning Repository.
+* Enable direct document upload — allowing users to upload a medical or diagnostic report (e.g., a text or PDF file) from which the system will automatically extract relevant voice-based or biomedical features for prediction.
+* Build an interactive UI to support this upload and display prediction results clearly.
 
 ---
-
-Would you like me to add a short **“How to Run on Google Colab”** section (step-by-step upload or GitHub clone instructions)?
-It’ll make the README more useful for people trying it themselves.
