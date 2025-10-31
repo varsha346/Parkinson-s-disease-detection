@@ -1,0 +1,71 @@
+# 🧠 Parkinson's Disease Detection using Random Forest + SMOTE
+
+# Step 1️⃣: Import all libraries
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from imblearn.over_sampling import SMOTE
+
+# Step 2️⃣: Load the dataset
+data = pd.read_csv('Parkinsson disease.csv')
+
+# Step 3️⃣: Separate features (X) and target (y)
+X = data.drop(['name', 'status'], axis=1)
+y = data['status']
+
+# Step 4️⃣: Check for missing or duplicate values (optional)
+print("Missing values:\n", data.isnull().sum())
+print("\nDuplicate rows:", data.duplicated().sum())
+
+# Step 5️⃣: Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=2, stratify=y
+)
+
+# Step 6️⃣: Feature scaling (standardization)
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Step 7️⃣: Handle imbalanced data using SMOTE
+sm = SMOTE(random_state=42)
+X_train, y_train = sm.fit_resample(X_train, y_train)
+
+print("\n✅ After SMOTE balancing:")
+unique, counts = np.unique(y_train, return_counts=True)
+print(dict(zip(unique, counts)))
+
+# Step 8️⃣: Initialize and train Random Forest model
+rf = RandomForestClassifier(
+    n_estimators=200,     # number of trees
+    max_depth=None,       # let trees expand fully
+    random_state=42,
+    n_jobs=-1             # use all CPU cores for faster training
+)
+rf.fit(X_train, y_train)
+
+# Step 9️⃣: Make predictions
+y_pred = rf.predict(X_test)
+
+# Step 🔟: Evaluate model performance
+accuracy = accuracy_score(y_test, y_pred)
+conf_matrix = confusion_matrix(y_test, y_pred)
+class_report = classification_report(y_test, y_pred)
+
+print("\n🎯 Model Evaluation Results:")
+print(f"Accuracy: {accuracy * 100:.2f}%")
+print("\nConfusion Matrix:\n", conf_matrix)
+print("\nClassification Report:\n", class_report)
+
+# Step 1️⃣1️⃣: (Optional) Feature Importance Visualization
+import matplotlib.pyplot as plt
+
+feature_importances = pd.Series(rf.feature_importances_, index=X.columns)
+feature_importances.nlargest(10).plot(kind='barh', color='skyblue')
+plt.title("Top 10 Important Features - Random Forest")
+plt.xlabel("Importance Score")
+plt.ylabel("Feature")
+plt.show()
